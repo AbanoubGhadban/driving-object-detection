@@ -48,13 +48,16 @@ def split(df, group):
 
 
 def create_tf_example(group, path, label_map):
-    with tf.gfile.GFile(os.path.join(path, "{}".format(group.filename)), "rb") as fid:
+    fname = group.filename
+    if "." not in fname:
+        fname = fname + ".jpg"
+    with tf.gfile.GFile(os.path.join(path, "{}".format(fname)), "rb") as fid:
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg)
     image = Image.open(encoded_jpg_io)
     width, height = image.size
 
-    filename = group.filename.encode("utf8")
+    filename = fname.encode("utf8")
     image_format = b"jpg"
     # check if the image format is matching with your images.
     xmins = []
