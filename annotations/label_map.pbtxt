@@ -1,10 +1,5 @@
 item {
     id: 1
-    name: 'knife'
-}
-
-item {
-    id: 2
     name: 'pistol'
 }
 
